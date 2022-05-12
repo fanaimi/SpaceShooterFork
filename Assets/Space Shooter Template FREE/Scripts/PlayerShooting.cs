@@ -16,8 +16,8 @@ public class PlayerShooting : MonoBehaviour {
     [Tooltip("shooting frequency. the higher the more frequent")]
     public float fireRate;
 
-    [Tooltip("projectile prefab")]
-    public GameObject projectileObject;
+    [Tooltip("projectile prefabs")]
+    public List<GameObject> projectileObjects;
 
     //time for a new shot
     [HideInInspector] public float nextFire;
@@ -60,6 +60,8 @@ public class PlayerShooting : MonoBehaviour {
     //method for a shot
     void MakeAShot() 
     {
+        var projectileObject = projectileObjects[Random.Range(0, projectileObjects.Count)];
+
         switch (weaponPower) // according to weapon power 'pooling' the defined anount of projectiles, on the defined position, in the defined rotation
         {
             case 1:
