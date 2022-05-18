@@ -20,8 +20,7 @@ public class PlayerMoving : MonoBehaviour {
     public Borders borders;
     Camera mainCamera;
     bool controlIsActive = true;
-    [SerializeField] private float moveSpeed;
-
+    public int movementSpeed = 15;
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
 
     private void Awake()
@@ -44,28 +43,15 @@ public class PlayerMoving : MonoBehaviour {
 
 #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
 
-            if (Input.GetMouseButton(0)) //if mouse button was pressed       
-            {
-                Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
-                mousePosition.z = transform.position.z;
-                transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.W))
-            {
-                transform.position += new Vector3(0, moveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.position += new Vector3(-moveSpeed * Time.deltaTime, 0);
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                transform.position += new Vector3(0, -moveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.position += new Vector3(moveSpeed * Time.deltaTime, 0);
-            }
+        var movementDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        transform.position += movementDirection.normalized * movementSpeed * Time.deltaTime;
+
+        if (Input.GetMouseButton(0)) //if mouse button was pressed       
+        {
+            Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+            mousePosition.z = transform.position.z;
+            transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+        }
 #endif
 
 #if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
