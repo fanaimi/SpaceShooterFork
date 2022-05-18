@@ -19,8 +19,8 @@ public class PlayerMoving : MonoBehaviour {
     [Tooltip("offset from viewport borders for player's movement")]
     public Borders borders;
     Camera mainCamera;
-    bool controlIsActive = true; 
-
+    bool controlIsActive = true;
+    public int movementSpeed = 15;
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
 
     private void Awake()
@@ -37,8 +37,10 @@ public class PlayerMoving : MonoBehaviour {
 
     private void Update()
     {
-        if (controlIsActive)
-        {
+
+        if (!controlIsActive)
+            return;
+
 #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
             /*
             if (Input.GetMouseButton(0)) //if mouse button was pressed       
@@ -87,7 +89,7 @@ public class PlayerMoving : MonoBehaviour {
                 Mathf.Clamp(transform.position.y, borders.minY, borders.maxY),
                 0
                 );
-        }
+        
     }
 
     //setting 'Player's' movement borders according to Viewport size and defined offset
