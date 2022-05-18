@@ -43,7 +43,7 @@ public class PlayerMoving : MonoBehaviour {
             return;
 
 #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
-
+            
             if (Input.GetMouseButton(0)) //if mouse button was pressed       
             {
                 Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
