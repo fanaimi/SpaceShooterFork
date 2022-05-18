@@ -17,3 +17,4 @@ public class PlayerMove : MonoBehaviour
         movePlayer = new Vector3(moveX, moveY, 0);
         transform.Translate(movePlayer * speed * Time.deltaTime, Space.World);
     }
+}
