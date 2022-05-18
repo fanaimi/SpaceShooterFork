@@ -26,6 +26,11 @@
 # Visual Studio cache directory
 .vs/
 
+#Project settings and Lock
+C:\Users\gumke\Desktop\CircuitStreamStuff\GameJam1\spaceshoot\SpaceShooter\Packages\packages-lock.json
+C:\Users\gumke\Desktop\CircuitStreamStuff\GameJam1\spaceshoot\SpaceShooter\ProjectSettings\Packages\com.unity.testtools.codecoverage\Settings.json
+C:\Users\gumke\Desktop\CircuitStreamStuff\GameJam1\spaceshoot\SpaceShooter\ProjectSettings\ProjectSettings.asset
+
 # Gradle cache directory
 .gradle/
 
