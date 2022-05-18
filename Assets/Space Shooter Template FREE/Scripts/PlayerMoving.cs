@@ -40,13 +40,35 @@ public class PlayerMoving : MonoBehaviour {
         if (controlIsActive)
         {
 #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
-
+            /*
             if (Input.GetMouseButton(0)) //if mouse button was pressed       
             {
                 Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
                 mousePosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+            }*/
+
+            float m_speed = 20;
+            if (Input.GetKey(KeyCode.W))
+            {
+                this.transform.Translate(Vector3.up * m_speed * Time.deltaTime);
             }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                this.transform.Translate(Vector3.down * m_speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                this.transform.Translate(Vector3.left * m_speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.transform.Translate(Vector3.right * m_speed * Time.deltaTime);
+            }
+
 #endif
 
 #if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
