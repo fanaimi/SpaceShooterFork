@@ -35,19 +35,19 @@ public class PlayerMoving : MonoBehaviour {
     private void Start()
     {
         mainCamera = Camera.main;
-        _playerRigidBody = GetComponent<RigidBody2D>();
-        ResizeBorders();                //setting 'Player's' moving borders deending on Viewport's size
+        // _playerRigidBody = GetComponent<RigidBody2D>();
+        // ResizeBorders(); //setting 'Player's' moving borders deending on Viewport's size
     }
-    private void BlasterRecoilNegate()
-    {
-        _playerRigidbody.velocity = new Vector2( 0, jumpPower);
-    }
+    // private void BlasterRecoilNegate()
+    // {
+    //     _playerRigidbody.velocity = new Vector2( 0, jumpPower);
+    // }
 
-    private void MovePlayer()
-    {
-        var horizontalInput = Input.GetAxisRaw("Horizontal");
-        _playerRigidbody.velocity = new Vector2(horizontalInput * playerSpeed, _playerRigidbody.velocity.y);
-    }
+    // private void MovePlayer()
+    // {
+    //     var horizontalInput = Input.GetAxisRaw("Horizontal");
+    //     _playerRigidbody.velocity = new Vector2(horizontalInput * playerSpeed, _playerRigidbody.velocity.y);
+    // }
 
     private void Update()
     {
@@ -84,7 +84,7 @@ public class PlayerMoving : MonoBehaviour {
                 this.transform.Translate(Vector3.right * m_speed * Time.deltaTime);
             }
 
-#endif
+// #endif
 
 //             // if (Input.GetMouseButton(0)) //if mouse button was pressed       
 //             // {
@@ -101,28 +101,30 @@ public class PlayerMoving : MonoBehaviour {
 //             }
 // #endif
 
-            if (Input.touchCount == 1) // if there is a touch
-            {
-                Touch touch = Input.touches[0];
-                Vector3 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);  //calculating touch position in the world space
-                touchPosition.z = transform.position.z;
-            }
-                transform.position = Vector3.MoveTowards(transform.position, touchPosition, 30 * Time.deltaTime);
-#endif
-            transform.position = new Vector3    //if 'Player' crossed the movement borders, returning him back 
-                Mathf.Clamp(transform.position.x, borders.minX, borders.maxX),
-                (
-                Mathf.Clamp(transform.position.y, borders.minY, borders.maxY),
-                0
-                );
-    }
+//             if (Input.touchCount == 1) // if there is a touch
+//             {
+//                 Touch touch = Input.touches[0];
+//                 Vector3 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);  //calculating touch position in the world space
+//                 touchPosition.z = transform.position.z;
+//             }
+//                 transform.position = Vector3.MoveTowards(transform.position, touchPosition, 30 * Time.deltaTime);
+// #endif
+//             transform.position = new Vector3    //if 'Player' crossed the movement borders, returning him back 
+//                 Mathf.Clamp(transform.position.x, borders.minX, borders.maxX),
+//                 (
+//                 Mathf.Clamp(transform.position.y, borders.minY, borders.maxY),
+//                 0
+//                 );
+//     }
 
     //setting 'Player's' movement borders according to Viewport size and defined offset
-    void ResizeBorders() 
-    {
-        borders.minX = mainCamera.ViewportToWorldPoint(Vector2.zero).x + borders.minXOffset;
-        borders.minY = mainCamera.ViewportToWorldPoint(Vector2.zero).y + borders.minYOffset;
-        borders.maxX = mainCamera.ViewportToWorldPoint(Vector2.right).x - borders.maxXOffset;
-        borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
-    }
+//     void ResizeBorders() 
+//     {
+//         borders.minX = mainCamera.ViewportToWorldPoint(Vector2.zero).x + borders.minXOffset;
+//         borders.minY = mainCamera.ViewportToWorldPoint(Vector2.zero).y + borders.minYOffset;
+//         borders.maxX = mainCamera.ViewportToWorldPoint(Vector2.right).x - borders.maxXOffset;
+//         borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
+//     }
+// }
+}
 }
