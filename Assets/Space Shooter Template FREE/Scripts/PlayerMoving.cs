@@ -35,26 +35,6 @@ public class PlayerMoving : MonoBehaviour {
         ResizeBorders();                //setting 'Player's' moving borders deending on Viewport's size
     }
 
-    private void FixedUpdate()
-    {
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position += Vector3.left * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += Vector3.right * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += Vector3.up * speed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position += Vector3.down * speed * Time.deltaTime;
-        }
-    }
-
     private void Update()
     {
 
