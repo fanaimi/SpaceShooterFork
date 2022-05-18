@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +22,8 @@ public class PlayerMoving : MonoBehaviour {
     public Borders borders;
     Camera mainCamera;
     bool controlIsActive = true; 
+    public float speed;
+    private Rigidbody rigid;
 
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
 
@@ -41,11 +45,18 @@ public class PlayerMoving : MonoBehaviour {
         {
 #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
 
-            if (Input.GetMouseButton(0)) //if mouse button was pressed       
+            // if (Input.GetMouseButton(0)) //if mouse button was pressed       
+            // {
+            //     Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+            //     mousePosition.z = transform.position.z;
+            //     transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+            // }
+            float Horizontal = Input.GetAxis("Horizontal");
+            float Vertical = Input.GetAxis("Vertical");
+            if (Input.GetAxis.buttons()) //if mouse button was pressed       
             {
-                Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
-                mousePosition.z = transform.position.z;
-                transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+                Vector3 move = new Vector3 (Horizontal, 0.0f, Vertical);
+                rigid.AddForce (move * speed);
             }
 #endif
 
