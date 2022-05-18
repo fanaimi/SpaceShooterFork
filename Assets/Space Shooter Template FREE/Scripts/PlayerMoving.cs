@@ -22,6 +22,7 @@ public class PlayerMoving : MonoBehaviour {
     bool controlIsActive = true; 
 
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
+    [SerializeField] private float moveSpeed = 4f;
 
     private void Awake()
     {
@@ -47,6 +48,10 @@ public class PlayerMoving : MonoBehaviour {
                 mousePosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
             }
+
+            KeyboardController();
+            
+            
 #endif
 
 #if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
@@ -75,5 +80,28 @@ public class PlayerMoving : MonoBehaviour {
         borders.minY = mainCamera.ViewportToWorldPoint(Vector2.zero).y + borders.minYOffset;
         borders.maxX = mainCamera.ViewportToWorldPoint(Vector2.right).x - borders.maxXOffset;
         borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
+    }
+
+    private void KeyboardController()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
     }
 }
