@@ -19,7 +19,8 @@ public class PlayerMoving : MonoBehaviour {
     [Tooltip("offset from viewport borders for player's movement")]
     public Borders borders;
     Camera mainCamera;
-    bool controlIsActive = true; 
+    bool controlIsActive = true;
+    [SerializeField] private float m_speed = 30f;
 
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
 
@@ -46,7 +47,31 @@ public class PlayerMoving : MonoBehaviour {
                 Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
                 mousePosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+
+
             }
+
+            if(Input.GetKey(KeyCode.A))
+            {
+                this.transform.Translate(Vector3.left * m_speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                this.transform.Translate(Vector3.up * m_speed * Time.deltaTime);
+            }
+            
+            if (Input.GetKey(KeyCode.S))
+            {
+                this.transform.Translate(Vector3.down * m_speed * Time.deltaTime);
+            }
+            
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.transform.Translate(Vector3.right * m_speed * Time.deltaTime);
+            }
+
+
 #endif
 
 #if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
