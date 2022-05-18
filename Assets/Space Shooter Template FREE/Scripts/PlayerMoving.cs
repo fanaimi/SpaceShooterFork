@@ -1,5 +1,6 @@
 ﻿
 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,8 +23,9 @@ public class PlayerMoving : MonoBehaviour {
     public Borders borders;
     Camera mainCamera;
     bool controlIsActive = true; 
-    public float speed;
-    private Rigidbody rigid;
+    [SerializeField] private float m_Speed;
+    [SerializeField] private float m_blasterRecoil;
+    private RigidBody2D _playerRigidBody;
 
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
 
@@ -36,47 +38,63 @@ public class PlayerMoving : MonoBehaviour {
     private void Start()
     {
         mainCamera = Camera.main;
+        _playerRigidBody = GetComponent<RigidBody2D>();
         ResizeBorders();                //setting 'Player's' moving borders deending on Viewport's size
+    }
+    private void BlasterRecoilNegate()
+    {
+        _playerRigidbody.velocity = new Vector2( 0, jumpPower);
+    }
+
+    private void MovePlayer()
+    {
+        var horizontalInput = Input.GetAxisRaw("Horizontal");
+        _playerRigidbody.velocity = new Vector2(horizontalInput * playerSpeed, _playerRigidbody.velocity.y);
     }
 
     private void Update()
     {
-        if (controlIsActive)
-        {
-#if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
+        MovePlayer();
+        if(Input.GetButton("Recoil") && JustShot());
+          BlasterRecoilNegate();
+        
 
-            // if (Input.GetMouseButton(0)) //if mouse button was pressed       
-            // {
-            //     Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
-            //     mousePosition.z = transform.position.z;
-            //     transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
-            // }
-            float Horizontal = Input.GetAxis("Horizontal");
-            float Vertical = Input.GetAxis("Vertical");
-            if (Input.GetAxis.buttons()) //if mouse button was pressed       
-            {
-                Vector3 move = new Vector3 (Horizontal, 0.0f, Vertical);
-                rigid.AddForce (move * speed);
-            }
-#endif
+//         if (controlIsActive)
+//         {
+// #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
 
-#if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
+//             // if (Input.GetMouseButton(0)) //if mouse button was pressed       
+//             // {
+//             //     Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+//             //     mousePosition.z = transform.position.z;
+//             //     transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+//             // }
+//             float Horizontal = Input.GetAxis("Horizontal");
+//             float Vertical = Input.GetAxis("Vertical");
+//             if (Input.GetAxis.()) //if mouse button was pressed       
+//             {
+//                 Vector3 move = new Vector3 (Horizontal, 0.0f, Vertical);
+//                 rigid.AddForce (move * speed);
+//             }
+// #endif
 
-            if (Input.touchCount == 1) // if there is a touch
-            {
-                Touch touch = Input.touches[0];
-                Vector3 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);  //calculating touch position in the world space
-                touchPosition.z = transform.position.z;
-                transform.position = Vector3.MoveTowards(transform.position, touchPosition, 30 * Time.deltaTime);
-            }
-#endif
-            transform.position = new Vector3    //if 'Player' crossed the movement borders, returning him back 
-                (
-                Mathf.Clamp(transform.position.x, borders.minX, borders.maxX),
-                Mathf.Clamp(transform.position.y, borders.minY, borders.maxY),
-                0
-                );
-        }
+// #if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
+
+//             if (Input.touchCount == 1) // if there is a touch
+//             {
+//                 Touch touch = Input.touches[0];
+//                 Vector3 touchPosition = mainCamera.ScreenToWorldPoint(touch.position);  //calculating touch position in the world space
+//                 touchPosition.z = transform.position.z;
+//                 transform.position = Vector3.MoveTowards(transform.position, touchPosition, 30 * Time.deltaTime);
+//             }
+// #endif
+//             transform.position = new Vector3    //if 'Player' crossed the movement borders, returning him back 
+//                 (
+//                 Mathf.Clamp(transform.position.x, borders.minX, borders.maxX),
+//                 Mathf.Clamp(transform.position.y, borders.minY, borders.maxY),
+//                 0
+//                 );
+//         }
     }
 
     //setting 'Player's' movement borders according to Viewport size and defined offset
