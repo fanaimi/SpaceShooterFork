@@ -14,6 +14,8 @@ public class Borders
     [HideInInspector] public float minX, maxX, minY, maxY;
 }
 
+
+
 public class PlayerMoving : MonoBehaviour {
 
     [Tooltip("offset from viewport borders for player's movement")]
@@ -33,6 +35,8 @@ public class PlayerMoving : MonoBehaviour {
     {
         mainCamera = Camera.main;
         ResizeBorders();                //setting 'Player's' moving borders deending on Viewport's size
+        
+
     }
 
     private void Update()
@@ -46,6 +50,11 @@ public class PlayerMoving : MonoBehaviour {
                 Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
                 mousePosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                return;
             }
 #endif
 
@@ -76,4 +85,6 @@ public class PlayerMoving : MonoBehaviour {
         borders.maxX = mainCamera.ViewportToWorldPoint(Vector2.right).x - borders.maxXOffset;
         borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
     }
+
+    float speed = 5f;
 }
