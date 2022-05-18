@@ -52,22 +52,22 @@ public class PlayerMoving : MonoBehaviour {
             }*/
 
             float m_speed = 20;
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 this.transform.Translate(Vector3.up * m_speed * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 this.transform.Translate(Vector3.down * m_speed * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 this.transform.Translate(Vector3.left * m_speed * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 this.transform.Translate(Vector3.right * m_speed * Time.deltaTime);
             }
@@ -102,26 +102,4 @@ public class PlayerMoving : MonoBehaviour {
         borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
     }
 
-    private void KeyboardController()
-    {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
-        }
-        
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
-        }
-        
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
-        }
-        
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
-        }
-    }
 }
