@@ -8,9 +8,9 @@ public class ShottRapidUp : MonoBehaviour
 {
     [SerializeField] public GameObject[] m_FastUps;
 
-    private void FasterShoot(){
-        if(GameObject == null){
-            return;
-        }
-    }
+    // private void FasterShoot(){
+    //     if(GameObject == null){
+    //         return;
+    //     }
+    // }
 }
