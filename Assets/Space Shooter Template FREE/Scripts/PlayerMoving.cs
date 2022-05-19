@@ -20,9 +20,9 @@ public class PlayerMoving : MonoBehaviour {
     public Borders borders;
     Camera mainCamera;
     bool controlIsActive = true;
-    [SerializeField] private float moveSpeed;
-
+    public int movementSpeed = 15;
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
+    [SerializeField] private float moveSpeed = 4f;
 
     private void Awake()
     {
@@ -38,32 +38,22 @@ public class PlayerMoving : MonoBehaviour {
 
     private void Update()
     {
-        if (controlIsActive)
-        {
-#if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
 
+        if (!controlIsActive)
+            return;
+
+#if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
+            
             if (Input.GetMouseButton(0)) //if mouse button was pressed       
             {
                 Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
                 mousePosition.z = transform.position.z;
                 transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
             }
-            if (Input.GetKey(KeyCode.W))
-            {
-                transform.position += new Vector3(0, moveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.position += new Vector3(-moveSpeed * Time.deltaTime, 0);
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                transform.position += new Vector3(0, -moveSpeed * Time.deltaTime);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.position += new Vector3(moveSpeed * Time.deltaTime, 0);
-            }
+
+            KeyboardController();
+            
+            
 #endif
 
 #if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
@@ -82,7 +72,7 @@ public class PlayerMoving : MonoBehaviour {
                 Mathf.Clamp(transform.position.y, borders.minY, borders.maxY),
                 0
                 );
-        }
+        
     }
 
     //setting 'Player's' movement borders according to Viewport size and defined offset
@@ -92,5 +82,28 @@ public class PlayerMoving : MonoBehaviour {
         borders.minY = mainCamera.ViewportToWorldPoint(Vector2.zero).y + borders.minYOffset;
         borders.maxX = mainCamera.ViewportToWorldPoint(Vector2.right).x - borders.maxXOffset;
         borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
+    }
+
+    private void KeyboardController()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
     }
 }
