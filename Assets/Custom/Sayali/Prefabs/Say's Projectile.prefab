@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 114386108727387182}
   - component: {fileID: 114558762702151638}
   - component: {fileID: 50246834944912052}
+  - component: {fileID: -8226659430822204689}
   m_Layer: 0
   m_Name: Say's Projectile
   m_TagString: Projectile
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b6089e27b1bf04d872f2468cdcd91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -3
+  speed: -7
 --- !u!114 &114558762702151638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,3 +165,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!111 &-8226659430822204689
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728936453619090}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 114d9cd5f3f1a1a41ac0b6ea57ca7cd8, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 114d9cd5f3f1a1a41ac0b6ea57ca7cd8, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
