@@ -25,7 +25,6 @@ public class PlayerMoving : MonoBehaviour {
     bool controlIsActive = true;
     public int movementSpeed = 15;
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
-    [SerializeField] private float moveSpeed = 4f;
 
     private void Awake()
     {
@@ -65,22 +64,22 @@ public class PlayerMoving : MonoBehaviour {
             }*/
 
             float m_speed = 20;
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
+            if (Input.GetKey(KeyCode.W))
                 this.transform.Translate(Vector3.up * m_speed * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.S))
             {
                 this.transform.Translate(Vector3.down * m_speed * Time.deltaTime);
             }
 
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.A))
             {
             }
                 this.transform.Translate(Vector3.left * m_speed * Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.D))
             {
                 this.transform.Translate(Vector3.right * m_speed * Time.deltaTime);
             }
@@ -120,13 +119,12 @@ public class PlayerMoving : MonoBehaviour {
 
     //setting 'Player's' movement borders according to Viewport size and defined offset
 //     void ResizeBorders() 
-//         borders.minY = mainCamera.ViewportToWorldPoint(Vector2.zero).y + borders.minYOffset;
 //     {
 //         borders.minX = mainCamera.ViewportToWorldPoint(Vector2.zero).x + borders.minXOffset;
+//         borders.minY = mainCamera.ViewportToWorldPoint(Vector2.zero).y + borders.minYOffset;
 //         borders.maxX = mainCamera.ViewportToWorldPoint(Vector2.right).x - borders.maxXOffset;
-//     }
 //         borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
-
+//     }
 // }
 }
 }
