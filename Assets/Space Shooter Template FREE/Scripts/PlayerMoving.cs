@@ -22,6 +22,7 @@ public class PlayerMoving : MonoBehaviour {
     bool controlIsActive = true;
     public int movementSpeed = 15;
     public static PlayerMoving instance; //unique instance of the script for easy access to the script
+    [SerializeField] private float moveSpeed = 4f;
 
     private void Awake()
     {
@@ -42,9 +43,18 @@ public class PlayerMoving : MonoBehaviour {
             return;
 
 #if UNITY_STANDALONE || UNITY_EDITOR    //if the current platform is not mobile, setting mouse handling 
+            /*
+            if (Input.GetMouseButton(0)) //if mouse button was pressed       
+            {
+                Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); //calculating mouse position in the worldspace
+                mousePosition.z = transform.position.z;
+                transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
+            }
 
-        var movementDirection = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.position += movementDirection.normalized * movementSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.transform.Translate(Vector3.right * m_speed * Time.deltaTime);
+            }
 
         if (Input.GetMouseButton(0)) //if mouse button was pressed       
         {
@@ -52,7 +62,6 @@ public class PlayerMoving : MonoBehaviour {
             mousePosition.z = transform.position.z;
             transform.position = Vector3.MoveTowards(transform.position, mousePosition, 30 * Time.deltaTime);
         }
-        Debug.Log("this is supposed to be in a commit");
 #endif
 
 #if UNITY_IOS || UNITY_ANDROID //if current platform is mobile, 
@@ -81,5 +90,28 @@ public class PlayerMoving : MonoBehaviour {
         borders.minY = mainCamera.ViewportToWorldPoint(Vector2.zero).y + borders.minYOffset;
         borders.maxX = mainCamera.ViewportToWorldPoint(Vector2.right).x - borders.maxXOffset;
         borders.maxY = mainCamera.ViewportToWorldPoint(Vector2.up).y - borders.maxYOffset;
+    }
+
+    private void KeyboardController()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+        }
+        
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
     }
 }
