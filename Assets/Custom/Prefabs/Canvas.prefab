@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Great Nebula shooter
+  m_text: Great Nebula
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5cccf0af6dfee15439a6a44f90ced35e, type: 2}
   m_sharedMaterial: {fileID: -6824422337137515214, guid: 5cccf0af6dfee15439a6a44f90ced35e,
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 112.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
